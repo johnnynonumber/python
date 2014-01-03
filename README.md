@@ -1,4 +1,4 @@
 python
 ======
 
-Python tests
+Just a place to store my python tests whilst I learn.
