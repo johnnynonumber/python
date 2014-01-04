@@ -14,19 +14,10 @@ for page in pagenumbers:
                 if subreddit not in redditlist:
                         redditlist.append(subreddit)
         print "Page",page,"done!" 
-
-for page in pagenumbers:
-        url_NSFW = 'http://www.redditlist.com/nsfw/page-'+str(page)+''
-        source_NSFW = urllib2.urlopen(url_NSFW).read()
-        find_group_NSFW = re.compile('">(.+?)</a></td>')
-        subreddit_per_page_NSFW = find_group_NSFW.findall(source_NSFW)
-        for subreddit_NSFW in subreddit_per_page_NSFW:
-                if subreddit_NSFW not in redditlist:
-                        redditlist.append(subreddit_NSFW)
-        print "NSFW Page",page,"done!" 
-
+		
+print "All pages done!"
 print "\n","Writing to file...","\n"        
 with open("redditlist.txt", mode='wt') as myfile:
         myfile.write('\n'.join(redditlist))
-        
-print "All pages done!"
+		
+print "Done!"
