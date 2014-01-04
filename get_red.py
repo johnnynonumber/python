@@ -20,13 +20,10 @@ with open("redditlist.txt", mode='wt') as myfile:
         myfile.write('\n'.join(redditlist))
         
 print "All pages done!"
-
-
-
-
 '''
-r = praw.Reddit(user_agent='u/JohnnyNoNumber testing PRAW')
-'''
+
+r = praw.Reddit(user_agent='u/JohnnyNoNumber PRAW bot testing')
+
 print "\n","Logging into Reddit...","\n"
 r.login(username='johnnynonumber',password='toasters8')
 
@@ -35,7 +32,6 @@ if r.is_logged_in() is True:
 else:
         print "Nooooo!"
 
-'''
 already_done = []        
 my_keywords = ['Blizzard']
 redditlist = open("redditlist.txt").read().split("\n")
@@ -52,5 +48,5 @@ while True:
                                 msg = '[NoNumber Bot] Post of Interest(%s)' % post.short_link
                                 r.user.send_message('JohnnyNoNumber', msg)
 
-        print "Waiting 5 seconds.","\n\n"
+        print "Waiting 2 minutes.","\n\n"
         time.sleep(120)
