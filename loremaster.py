@@ -1,13 +1,20 @@
-import praw, time, datetime, urllib2, re
+import urllib2
+import re
+import time
 from datetime import datetime
-from pprint import pprint
+
+import praw
+
+
+
 
 r = praw.Reddit(user_agent='u/JohnnyNoNumber testing PRAW')
+
+
 
 # Scrape source of a website that lists many subreddits
 # Create a text file with all the subreddits listed
 # If necessary, remove duplicated listings so each subreddit is a unique entry
-
 pagenumbers = range(1,2)
 redditlist = []
 
@@ -32,10 +39,10 @@ print "Done writing to file!"
 print "--------------------------"
 
 
+
 # Login to reddit, and get the most recent post of every subreddit in all_reddits.txt
 # If the post was made in 2014, consider that subreddit "fresh"
 # Build a list of fresh subreddits, and save to a text file
-
 print "\n","Logging into Reddit...","\n"
 r.login(username='johnnynonumber',password='toasters8')
 
@@ -62,7 +69,6 @@ with open("fresh_subreddits.txt", mode='wt') as myfile:
 
 
 # Now check all the fresh subreddits for keywords
-
 loop_count = 0
 already_done = []
 core_list = open("fresh_subreddits.txt").read().split("\n")        
