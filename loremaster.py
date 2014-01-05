@@ -41,6 +41,8 @@ def FreshCheck(n):
                     fresh_subreddits.append(target_subreddit.display_name)
         except HTTPError:
             print "!! ",subreddit,"gave an error and was not checked !!"
+        except praw.errors.InvalidSubreddit:
+            print "!! ",subreddit,"is not an existing subreddit and was not checked !!"
             continue
     print "\n","All subreddits checked for freshness.","\n"
     return fresh_subreddits;
@@ -71,28 +73,15 @@ def KeywordCheck(n):
 
 
 
-# Define a unique user_agent for reddit API
-r = praw.Reddit(user_agent='PRAW tester/Python learner by u/JohnnyNoNumber')
-
-# Login to reddit
+# Define a unique user_agent for reddit API and login
+r = praw.Reddit(user_agent='PRAW tester_Python learner/0.2 by u/JohnnyNoNumber')
+'''
 print "\n","Logging into Reddit...","\n"
-#while r.is_logged_in() is False:
-for i in range(0,100):
-    while True:
-        try:
-            r.login(username='johnnynonumber')   
-            if r.is_logged_in() is True:
-                print "Logged in!","\n"
-            else:
-        except praw.errors.InvalidUserPass:
-            print "Wrong password."
-        except HTTPError:
-            print "Something went wrong."
-        except:
-            continue        
-        break
+r.login(username='JohnnyNoNumber', password='toasters8')
 
-
+if r.is_logged_in() is True:
+    print "Logged in.","\n"
+'''
 
 # Check if a file of fresh subreddits was already created
 print "Checking for previously fresh subreddits..."
@@ -112,9 +101,4 @@ except IOError:
     print "No file found - Getting new list..."
 
 # Pass Scrape() output into FreshCheck(), and pass that output into KeywordCheck()
-try:
-    KeywordCheck(FreshCheck(Scrape()));
-except HTTPConnectionPool:
-    print "Possible network connection issues. Retrying..."
-
-# Bot will run until KeyboardInterrupt or network error
+KeywordCheck(FreshCheck(Scrape()));
