@@ -31,11 +31,6 @@ for page in pagenumbers:
         print "Page",page,url,"done!" 
         
 print "Scraping done!"
-# print "\n","Writing subreddits to file..."       
-# with open("all_reddits.txt", mode='wt') as myfile:
-#        myfile.write('\n'.join(all_reddits))
-        
-# print "Done writing to file!"
 print "--------------------------"
 
 
@@ -49,7 +44,6 @@ r.login(username='johnnynonumber',password='toasters8')
 if r.is_logged_in() is True:
         print "Logged in.","\n"
 
-# all_reddits = open("all_reddits.txt").read().split("\n")
 fresh_subreddits = []
 
 print "Checking for date of submission for most recent post in every subreddit..."
@@ -62,8 +56,6 @@ for subreddit in all_reddits:
         newest_post = r.get_submission(submission_id = post.id)
         if newest_post.created_utc >= 1388534400:
                 fresh_subreddits.append(target_subreddit.display_name)
-# with open("fresh_subreddits.txt", mode='wt') as myfile:
-#        myfile.write('\n'.join(fresh_subreddits))
 
 
 
