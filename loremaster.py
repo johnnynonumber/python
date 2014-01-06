@@ -1,6 +1,4 @@
 import os.path as path
-import urllib2
-import re
 import time
 from datetime import datetime
 
@@ -10,22 +8,6 @@ from requests.exceptions import HTTPError
 def modification_date(filename):
     t = path.getmtime(filename)
     return datetime.utcfromtimestamp(t).strftime('%Y-%m-%d %H:%M:%S')
-
-def Scrape():
-    # Scrape source of a website that lists many subreddits
-    # Build a list of all the subreddits, all_reddits
-    # If necessary, remove duplicated listings so each subreddit is a unique entry
-    all_reddits = []
-    print "\n","Scraping http://www.reddit.com/r/gaming/wiki/faq for gaming reddits..."
-    url = 'http://www.reddit.com/r/gaming/wiki/faq'
-    source = urllib2.urlopen(url).read()
-    find_group = re.compile('<a href="/r/(.+?)"')
-    subfound = find_group.findall(source)
-    for subreddit in subfound:
-        if subreddit not in all_reddits:
-            all_reddits.append(subreddit)
-    print "Scraping done!","\n"
-    return all_reddits;
 
 def FreshCheck(n):
     # Check a list of reddits for freshness (latest post < 1 week old)
